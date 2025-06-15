@@ -124,11 +124,11 @@ TableDemo/
 **Status**: In Progress.
 
 #### 1.1 Project Setup
-- [ ] Initialize project with SvelteKit skeleton project
-- [ ] Configure TypeScript, ESLint, Prettier for SvelteKit
-- [ ] Setup development environment (Docker Compose for DB)
-- [ ] Create development scripts for easy startup
-- [ ] Configure build tools and hot reload (Vite)
+- [x] Initialize project with SvelteKit skeleton project
+- [x] Configure TypeScript, ESLint, Prettier for SvelteKit
+- [x] Setup development environment (Docker Compose for DB)
+- [x] Create development scripts for easy startup
+- [x] Configure build tools and hot reload (Vite)
 
 #### 1.2 Database & Data ✅ (Assumed from previous attempt)
 - [x] Research and select patient dataset (MIMIC-III, synthetic data, or public health data)
