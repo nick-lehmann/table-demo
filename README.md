@@ -1,8 +1,8 @@
-# TableDemo - High-Performance Healthcare Data Table
+# TableDemo - High-Performance Healthcare Data Table with SvelteKit
 
-> **🚀 Migration Complete**: Successfully migrated from AG Grid Community to TanStack Table for better server-side capabilities, no licensing costs, and complete UI control.
+> **🚀 Second Try**: Starting fresh with SvelteKit and TanStack Table for a better developer experience, more fine-grained reactivity and better overall performance.
 
-A comprehensive data table implementation showcasing advanced frontend and backend techniques for handling large healthcare datasets. Built with Next.js 14, TanStack Table, PostgreSQL, and modern React patterns.
+A comprehensive data table implementation showcasing advanced frontend and backend techniques for handling large healthcare datasets. Built with SvelteKit, TanStack Table, PostgreSQL, and modern web patterns.
 
 ## Key Features
 
@@ -11,31 +11,33 @@ A comprehensive data table implementation showcasing advanced frontend and backe
 ✅ **Real Total Counts**: Shows actual total records, not just current page  
 ✅ **Zero Licensing Costs**: 100% open source with TanStack Table  
 ✅ **Complete UI Control**: Custom-built components with healthcare-appropriate styling  
-✅ **Modern React**: Hooks-based architecture with TypeScript  
+✅ **Modern Svelte**: Component-based architecture with TypeScript and Svelte Stores.
 
-## Migration Benefits
+## Migration Benefits (from React/AG Grid)
 
-| Feature | AG Grid Community | TanStack Table |
+| Feature | AG Grid Community / React | SvelteKit / TanStack Table |
 |---------|-------------------|----------------|
 | **Server-side filtering** | Manual implementation required | ✅ Built-in support |
 | **Set filters** | ❌ Enterprise only | ✅ Custom implementation |
 | **Total record counts** | ❌ Limited | ✅ Full server-side support |
 | **Licensing** | Free but limited | ✅ MIT license, no restrictions |
-| **Bundle size** | Large (~2MB) | Small (~100KB) |
+| **Bundle size** | Large (~2MB) | Small (~100KB for TanStack Table) |
 | **Customization** | Theme-based | ✅ Complete control |
+| **Reactivity** | Virtual DOM | ✅ Fine-grained reactivity |
 
 ## Project Overview
 
-A holistic technical demonstration of a high-performance, feature-rich data table application designed to handle high-cardinality datasets with optimal user experience. This project showcases best practices for data visualization, performance optimization, and user interaction patterns.
+A holistic technical demonstration of a high-performance, feature-rich data table application designed to handle high-cardinality datasets with optimal user experience. This project showcases best practices for data visualization, performance optimization, and user interaction patterns using SvelteKit.
 
 ## Technology Stack
 
-- **Frontend**: Next.js 14+ (App Router), TypeScript, Tailwind CSS
-- **Table Library**: AG-Grid Community Edition
-- **State Management**: Zustand
-- **Backend**: Next.js API Routes
-- **Database**: PostgreSQL with proper indexing
-- **Caching**: Redis + Next.js built-in caching
+- **Framework**: SvelteKit
+- **Frontend**: Svelte, TypeScript, Tailwind CSS
+- **Table Library**: TanStack Table (Svelte Adapter)
+- **State Management**: Svelte Stores
+- **Backend**: SvelteKit Endpoints
+- **Database**: PostgreSQL with proper indexing (using Drizzle ORM)
+- **Caching**: Redis + SvelteKit Caching Mechanisms
 - **Validation**: Zod
 - **Data Format**: Patient healthcare dataset (high cardinality, synthetic/demo data)
 - **Compression**: Brotli/Gzip optimization
@@ -44,15 +46,20 @@ A holistic technical demonstration of a high-performance, feature-rich data tabl
 
 ```
 TableDemo/
-├── app/                  # Next.js App Router
-│   ├── api/             # API routes (backend functionality)
-│   ├── components/      # React components
-│   └── (dashboard)/     # App pages
-├── lib/                 # Utilities and configurations
-├── middleware/          # API middleware
-├── prisma/              # Database schema & migrations
-├── docker/              # Docker configurations
-└── docs/               # Documentation
+├── src/
+│   ├── lib/
+│   │   ├── components/  # Svelte components
+│   │   ├── server/      # Server-side code (DB, auth, etc.)
+│   │   └── utils/       # Shared utilities
+│   ├── routes/          # SvelteKit routes (pages and endpoints)
+│   │   └── api/         # API endpoints
+│   └── app.html         # Main HTML shell
+├── static/              # Static assets
+├── tests/               # Playwright tests
+├── bun.lockb
+├── package.json
+├── svelte.config.js
+└── tsconfig.json
 ```
 
 ## Architecture Goals
@@ -111,65 +118,64 @@ TableDemo/
 - 💊 Prescriptions: 19,828
 - Additional: Diagnoses, Procedures, Notes, Microbiology
 
-### Phase 1: Foundation & Data Setup ✅
+### Phase 1: Foundation & Data Setup
 **Goal**: Establish project structure and data foundation
 
-**Status**: Complete! All backend foundation work is done. Ready for Phase 2 table implementation.
+**Status**: In Progress.
 
 #### 1.1 Project Setup
-- [ ] Initialize project structure (nextjs defaults)
-- [ ] Configure TypeScript, ESLint, Prettier for Next.js full-stack app
-- [ ] Setup development environment (Docker Compose)
+- [ ] Initialize project with SvelteKit skeleton project
+- [ ] Configure TypeScript, ESLint, Prettier for SvelteKit
+- [ ] Setup development environment (Docker Compose for DB)
 - [ ] Create development scripts for easy startup
-- [ ] Configure build tools and hot reload
+- [ ] Configure build tools and hot reload (Vite)
 
-#### 1.2 Database & Data ✅
-- [ ] Research and select patient dataset (MIMIC-III, synthetic data, or public health data)
-- [ ] Design database schema with proper relationships
-- [ ] Setup Prisma ORM with PostgreSQL
-- [ ] Implement data seeding scripts with large dataset (100k+ records)
-- [ ] Add database indexing strategy for common queries
-- [ ] Setup connection pooling and query optimization
+#### 1.2 Database & Data ✅ (Assumed from previous attempt)
+- [x] Research and select patient dataset (MIMIC-III, synthetic data, or public health data)
+- [x] Design database schema with proper relationships
+- [x] Setup Drizzle ORM with PostgreSQL
+- [x] Implement data seeding scripts with large dataset (100k+ records)
+- [x] Add database indexing strategy for common queries
+- [x] Setup connection pooling and query optimization
 
-#### 1.3 Backend Foundation ✅
-- [ ] Setup Next.js API routes structure
-- [ ] Implement database connection and Prisma client
-- [ ] Create basic API endpoints (/api/health, /api/patients)
-- [ ] Add comprehensive request validation and filtering
+#### 1.3 Backend Foundation
+- [ ] Setup SvelteKit endpoints structure
+- [ ] Implement database connection and Drizzle client in `src/lib/server`
+- [ ] Create basic API endpoints (`/api/health`, `/api/patients`)
+- [ ] Add comprehensive request validation and filtering with Zod
 - [ ] Implement error handling and logging
-- [ ] Server-side pagination, sorting, and filtering
+- [ ] Server-side pagination, sorting, and filtering logic
 - [ ] Advanced API features (include relationships, statistics)
 
-### Phase 2: Core Table Implementation ✅
+### Phase 2: Core Table Implementation
 **Goal**: Build the essential table functionality
 
-**Status**: Complete! Core table functionality implemented with AG Grid, including pagination, sorting, column management, row selection, and comprehensive data type rendering.
+**Status**: Not Started.
 
-#### 2.1 Frontend Setup ✅
-- [ ] Setup Next.js 14+ with App Router and TypeScript
-- [ ] ~~Install and configure AG-Grid Community Edition~~ **Migrated to TanStack Table**
-- [ ] Install and configure TanStack Table with full server-side support
-- [ ] Setup Zustand for state management  
-- [ ] Configure API client with error handling (TanStack Query)
+#### 2.1 Frontend Setup
+- [ ] Setup SvelteKit with TypeScript
+- [ ] Install and configure TanStack Table with the Svelte adapter
+- [ ] Setup Svelte stores for state management  
+- [ ] Configure API client using `fetch` and TanStack Query for Svelte
 - [ ] Implement responsive design system with Tailwind CSS
 - [ ] Create base table component structure with custom filtering UI
 
-#### 2.2 Basic Table Features ✅
+#### 2.2 Basic Table Features
 - [ ] **Pagination**: Server-side pagination with total record counts and configurable page sizes
 - [ ] **Sorting**: Multi-column sorting with server-side processing and visual indicators
 - [ ] **Basic Filtering**: Comprehensive filter UI with text, number, date, boolean, and set filters
 - [ ] **Column Management**: Custom column definitions with flexible rendering
 - [ ] **Row Selection**: Single and multi-select with visual feedback and state management
 
-#### 2.3 Data Types & Rendering ✅
+#### 2.3 Data Types & Rendering
 - [ ] **String Columns**: Text rendering with custom formatting (Patient ID)
 - [ ] **Number Columns**: Formatting, alignment, range indicators (Age, counts)
 - [ ] **Boolean Columns**: Status badges with color coding (Living/Deceased)
 - [ ] **Enum Columns**: Badges, color coding, dropdown filters (Gender, Status)
 - [ ] **Date Columns**: Timezone handling, relative dates, formatting (DOB, DOD)
-- [ ] **Custom Renderers**: Status indicators, count badges, medical event counts
+- [ ] **Custom Renderers**: Status indicators, count badges, medical event counts using Svelte components
 
-#### 2.4 Advanced Filtering ✅
+#### 2.4 Advanced Filtering
 - [ ] **Global Search**: Search across all fields with server-side processing
 - [ ] **Set Filters**: Dropdown filters for categorical data (Gender, Status, Insurance, Ethnicity)
 - [ ] **Range Filters**: Min/Max inputs for numerical data (Age)
@@ -280,30 +286,6 @@ TableDemo/
 - Docker and Docker Compose
 - PostgreSQL (or use Docker)
 - Redis (or use Docker)
-
-### Development Setup
-```bash
-# Clone and setup
-git clone <repository>
-cd TableDemo
-npm install
-
-# Start development environment
-npm run dev:setup    # Setup databases
-npm run dev         # Start Next.js app
-
-# Database management
-npm run db:studio   # Open Prisma Studio
-npm run db:push     # Push schema changes
-```
-
-### Environment Configuration
-```bash
-# Copy environment file
-cp .env.example .env
-
-# Configure database and Redis connections
-```
 
 ## Technical Deep Dives
 

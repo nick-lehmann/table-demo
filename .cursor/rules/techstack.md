@@ -1,0 +1,5 @@
+- Svelte5 (with the new runes)
+- SvelteKit
+- TailwindCSS
+- Bun
+- Prettier & Eslint

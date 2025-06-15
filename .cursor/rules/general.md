@@ -6,16 +6,16 @@ This is a comprehensive data table demo application showcasing high-performance,
 ## Technology Stack Decisions
 
 ### Core Framework
-- **Framework**: Next.js 14+ with App Router (full-stack approach)
+- **Framework**: SvelteKit
 - **Language**: TypeScript everywhere (strict mode)
-- **Database**: PostgreSQL with Prisma ORM
-- **Table Library**: AG-Grid Community Edition
-- **State Management**: Zustand
+- **Database**: PostgreSQL with Drizzle ORM
+- **Table Library**: TanStack Table (Svelte Adapter)
+- **State Management**: Svelte Stores
 - **Styling**: Tailwind CSS
 - **Validation**: Zod for API validation
 
 ### Additional Tools
-- **Caching**: Redis for backend + Next.js built-in caching
+- **Caching**: Redis for backend + SvelteKit Caching Mechanisms
 - **Development**: Local-only development (no CI/CD, no deployment concerns)
 - **Data**: Synthetic patient healthcare dataset (high cardinality)
 
@@ -24,16 +24,16 @@ This is a comprehensive data table demo application showcasing high-performance,
 ### Performance First
 - Only fetch data that's actually needed (server-side pagination/filtering)
 - Implement debouncing for all user inputs
-- Use virtual scrolling for large datasets
-- Multi-layer caching strategy (browser, Next.js, Redis)
-- Optimize bundle sizes and lazy load components
+- Multi-layer caching strategy (browser, SvelteKit, Redis)
+- Optimize bundle sizes and leverage Svelte's compilation approach
 
 ### Code Organization
-- Use Next.js App Router structure
-- Shared TypeScript types between client and server
-- API routes in `/api` directory
-- Components organized by feature, not by type
-- Utility functions in dedicated utils folders
+- Use SvelteKit's file-based routing in `src/routes`
+- Shared TypeScript types between client and server in `src/lib`
+- Server-only logic in `src/lib/server`
+- API endpoints in `src/routes/api` using `+server.ts` files
+- Components organized by feature in `src/lib/components`
+- Utility functions in dedicated `src/lib/utils` folders
 
 ### Data Handling
 - Server-side filtering, sorting, and pagination
@@ -49,24 +49,25 @@ This is a comprehensive data table demo application showcasing high-performance,
 - Prefer interfaces over types for object shapes
 - Use proper generic typing for reusable components
 - No `any` types unless absolutely necessary
-- Use Prisma-generated types for database operations
+- Use Drizzle-generated types for database operations
 
-### React/Next.js Patterns
-- Prefer Server Components when possible
-- Use Client Components only when necessary (interactivity)
-- Implement proper error boundaries
-- Use Next.js built-in loading and error handling
-- Prefer composition over inheritance
+### Svelte/SvelteKit Patterns
+- Leverage Svelte's built-in reactivity with `$:` and stores.
+- Use `+page.svelte` for route components and `+layout.svelte` for layouts.
+- Fetch data in `+page.server.ts` or `+layout.server.ts` `load` functions.
+- Use streaming for progressively loading data to the client.
+- Prefer composition over inheritance for components.
+- Use Svelte stores (`writable`, `readable`, `derived`) for state management.
 
 ### API Design
-- RESTful API design with clear endpoints
+- RESTful API design with clear endpoints using `+server.ts` files.
 - Consistent response formats
 - Proper HTTP status codes
 - Request/response validation with Zod
 - Include metadata (pagination, totals, etc.)
 
 ### Database Patterns
-- Use Prisma for all database operations
+- Use Drizzle for all database operations
 - Implement proper indexing strategy
 - Use connection pooling
 - Optimize queries with proper relations
@@ -138,11 +139,12 @@ interface ApiResponse<T> {
 - Network condition testing
 
 ### File Naming Conventions
-- Use kebab-case for files and directories
-- Component files: `PascalCase.tsx`
-- API routes: `kebab-case.ts`
-- Utils: `camelCase.ts`
-- Types: `types.ts` or `index.ts`
+- Use kebab-case for files and directories (where not enforced by SvelteKit).
+- **SvelteKit routes**: `+page.svelte`, `+layout.svelte`, `+page.server.ts`, `+server.ts`
+- **Component files**: `PascalCase.svelte`
+- **API routes**: `+server.ts` inside `src/routes/api/`
+- **Lib files**: `kebab-case.ts` or `camelCase.ts`
+- **Types**: `types.ts` or `index.ts`
 
 ## Quality Standards
 
@@ -176,4 +178,4 @@ interface ApiResponse<T> {
 - Various data types and visualization needs
 - Privacy-conscious development practices (even for demo data)
 
-When generating code, prioritize performance, type safety, and user experience. Always consider the full-stack nature of the Next.js application and leverage its built-in optimizations. 
+When generating code, prioritize performance, type safety, and user experience. Always consider the full-stack nature of the SvelteKit application and leverage its built-in optimizations. 
